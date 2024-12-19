@@ -21,6 +21,8 @@ signal player_disconnected(_peerID : int)
 signal server_disconnected
 
 var playersLoaded : int = 0
+var lobbyFile : PackedScene = preload("res://scenes/levels/Lobby.tscn")
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -31,7 +33,6 @@ func _ready():
 	multiplayer.connection_failed.connect(_server_connection_failed)
 	multiplayer.server_disconnected.connect(_server_disconnected)
 
-var lobbyFile : PackedScene = preload("res://scenes/levels/Lobby.tscn")
 
 ## When player connects send all the playerInfo to everyone
 func _player_connected() -> void:
