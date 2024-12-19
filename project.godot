@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 ProgressionService="*res://services/save/ProgressionService.gd"
 UiAudio="*res://components/uicontrols/UIAudio.gd"
+Lobby="*res://scenes/levels/Lobby.gd"
 
 [debug]
 

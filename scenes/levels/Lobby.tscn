@@ -1,4 +1,16 @@
-[gd_scene format=3 uid="uid://dpf7t6duokaye"]
+[gd_scene load_steps=5 format=3 uid="uid://dpf7t6duokaye"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_hb1bj"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_pqv0n"]
+texture = SubResource("CanvasTexture_hb1bj")
+modulate_color = Color(2.06962e-06, 0.441563, 0.441942, 1)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_q3md3"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qeqiu"]
+texture = SubResource("CanvasTexture_q3md3")
+modulate_color = Color(0.589156, 0.746764, 0.894695, 1)
 
 [node name="Lobby" type="Control"]
 layout_mode = 3
@@ -7,3 +19,35 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 1089.0
+grow_vertical = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 20
+
+[node name="HostButton" type="Button" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/normal = SubResource("StyleBoxTexture_pqv0n")
+text = "Host
+"
+
+[node name="JoinButton" type="Button" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/normal = SubResource("StyleBoxTexture_qeqiu")
+text = "Join
+"

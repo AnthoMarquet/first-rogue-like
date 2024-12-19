@@ -11,6 +11,7 @@ func _ready():
 
 func _on_start_button_pressed():
 	print("Start button clicked")
+	get_tree().change_scene_to_file("res://scenes/levels/Lobby.tscn")
 
 
 func _on_credits_button_pressed():
