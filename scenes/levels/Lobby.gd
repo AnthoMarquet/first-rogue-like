@@ -33,23 +33,37 @@ func _ready():
 	multiplayer.connection_failed.connect(_server_connection_failed)
 	multiplayer.server_disconnected.connect(_server_disconnected)
 
+## Register new players informations
+@rpc("any_peer", "reliable") ## Everyone calls it & makes sure the packet is received properly
+func _register_player(_playerInfo : Dictionary) -> void:
+	var newPlayerID : int = multiplayer.get_remote_sender_id()
+	players[newPlayerID] = _playerInfo
+	player_connected.emit(newPlayerID, _playerInfo)
+	print("PLAYER REGISTERED: ", _playerInfo)
 
 ## When player connects send all the playerInfo to everyone
-func _player_connected() -> void:
-	pass
+func _player_connected(_id: int) -> void:
+	_register_player.rpc_id(_id, playerInfo)
+	print("PLAYER CONNECTED: ", _id)
 
 ## When player disconnects, send info to everyone and remove them
-func _player_disconnected() -> void:
-	pass
+func _player_disconnected(_id: int) -> void:
+	players.erase(_id)
+	player_disconnected.emit(_id)
 
 ## Host connected
 func _server_connected() -> void:
-	pass
+	var peerID : int = multiplayer.get_unique_id()
+	players[peerID] = playerInfo
+	player_connected.emit(peerID, playerInfo)
 
 ## Host connection failed
 func _server_connection_failed() -> void:
-	pass
+	multiplayer.multiplayer_peer = null
+	printerr("SERVER CONNECTION FAILED")
 
 ## Remove all info from server when disconnected
 func _server_disconnected() -> void:
-	pass
+	multiplayer.multiplayer_peer = null
+	players.clear()
+	server_disconnected.emit()
